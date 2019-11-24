@@ -21,10 +21,14 @@ public class ResultSceneManager : MonoBehaviour
     ///</summary>
     public TextMeshProUGUI ScoreText;
 
+    public GameObject GameClearImage;
+
     /// <summary>
     /// スコアを表示する時の表示物
     /// </summary>
     private string YourScore = "YourScore";
+
+
 
     private Material m_resultMaterial;
 
@@ -34,6 +38,7 @@ public class ResultSceneManager : MonoBehaviour
 
     private Color scorefontColor;
 
+    
     
 
     //Start is called before the first frame update
@@ -48,12 +53,13 @@ public class ResultSceneManager : MonoBehaviour
         ///1だったらゲームオーバーなので
         if(PlayerPrefs.GetInt(SaveDataManager.ResultSaveKey) == 1)
         {
-            ResultText.text = "GameOver";
+            ResultText.text = "GameOver"; GameClearImage.SetActive(false);
         }
         else
         {
             ResultText.text = "GameClear";
             ScoreText.text = string.Format("{0}:{1:00}", YourScore, PlayerPrefs.GetFloat(SaveDataManager.ScoreSaveKey));
+            GameClearImage.SetActive(true);
         }
 
         m_scoreMaterial = ScoreText.fontMaterial;
